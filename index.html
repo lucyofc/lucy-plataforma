@@ -130,7 +130,7 @@ clip-path:circle(0 at var(--cx,50%) var(--cy,50%));visibility:hidden;transition:
 <canvas id="sky" aria-hidden="true"></canvas>
 <header><div class="wrap">
 <a class="mark" href="#inicio">LUCY</a>
-<nav><a href="#lista">Módulos</a><a class="btn" href="mailto:contato@lucy-inst.com.br?subject=Apresenta%C3%A7%C3%A3o%20da%20Lucy">Falar com a equipe</a></nav>
+<nav><a href="#lista">Módulos</a><a href="https://www.youtube.com/@lucycursosoficial" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube</a><a class="btn" href="mailto:contato@lucy-inst.com.br?subject=Apresenta%C3%A7%C3%A3o%20da%20Lucy">Falar com a equipe</a></nav>
 </div></header>
 
 <main>
@@ -151,7 +151,7 @@ clip-path:circle(0 at var(--cx,50%) var(--cy,50%));visibility:hidden;transition:
 <a class="btn" href="mailto:contato@lucy-inst.com.br?subject=Apresenta%C3%A7%C3%A3o%20da%20Lucy">Solicitar apresentação</a>
 </section>
 </main>
-<footer><div class="wrap"><span>© 2026 lucy-inst.com.br. Todos os direitos reservados.</span><span>Build 1.0</span></div></footer>
+<footer><div class="wrap"><span>© 2026 lucy-inst.com.br. Todos os direitos reservados.</span><a href="https://www.youtube.com/@lucycursosoficial" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--mute);transition:color .2s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='var(--mute)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> YouTube @lucycursosoficial</a><span>Build 1.0</span></div></footer>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Detalhes do módulo"><div class="in" id="sin"></div></div>
 
@@ -167,7 +167,8 @@ var M=[
  d:"Domine do básico à criação web com ferramentas digitais na prática. Curso completo com certificado, projetos reais e suporte.",
  link:"https://lucycursosoficial.hotmart.host/informatica-na-pratica-do-basico-a-criacao-web-com-ferramentas-digitais-528fd202-2cd2-40b0-9b52-c57be21edfe7",
  btnText:"Acessar Curso na Hotmart",
- b:["Do básico à criação web com ferramentas digitais","Metodologia prática e direta ao ponto","Disponível na Hotmart com garantia e acesso imediato"]},
+ ytLink:"https://www.youtube.com/@lucycursosoficial",
+ b:["Do básico à criação web com ferramentas digitais","Canal oficial: YouTube @lucycursosoficial","Metodologia prática e direta ao ponto","Disponível na Hotmart com garantia e acesso imediato"]},
 {id:"lce",k:"LCE",s:"dev",n:"LCE",t:"IA causal construída sobre física aplicada",
  d:"Em vez de só reconhecer padrões, a LCE raciocina por causa e efeito, com base em leis físicas. Está em desenvolvimento.",
  b:["Modelo próprio, pensado para explicar o porquê das respostas","Base do cérebro causal que está sendo construído no Lucy Manager"]}
@@ -209,6 +210,7 @@ function show(i){var m=M[i];
  var actions = '';
  if(m.link){
    actions = '<a class="btn" href="'+m.link+'" target="_blank" rel="noopener noreferrer">'+(m.btnText||'Acessar curso')+' &nearr;</a> '
+   +(m.ytLink ? '<a class="btn ghost" href="'+m.ytLink+'" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Canal no YouTube</a> ' : '')
    +'<a class="btn ghost" href="mailto:contato@lucy-inst.com.br?subject='+encodeURIComponent("Dúvidas sobre o "+m.n)+'">Tirar dúvidas</a>';
  } else {
    actions = '<a class="btn" href="mailto:contato@lucy-inst.com.br?subject='+encodeURIComponent("Quero conhecer a "+m.n)+'">Falar sobre a '+m.n+'</a>';
