@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lucy — Plataforma institucional</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#050b16;--ink:#e9eff7;--mute:#8fa3b8;--blue:#35aaff;--amber:#ff9d2e;--line:rgba(120,170,230,.2);
+--head:"Michroma","Eurostile","Segoe UI",sans-serif;--body:"Manrope","Segoe UI",system-ui,sans-serif;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body)}
+a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+#sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+header,main,footer{position:relative;z-index:1}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
+.mark{font:400 20px var(--head);letter-spacing:.16em;text-decoration:none}
+nav{display:flex;gap:26px;align-items:center;font-size:15px}
+nav a{text-decoration:none;color:var(--mute)}nav a:hover{color:var(--ink)}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;background:var(--amber);color:#1a0e00;border:0;cursor:pointer}
+.btn:hover{background:#ffb457}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--blue)}
+/* capa */
+.hero{position:relative;min-height:calc(100svh - 76px);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding-bottom:28px}
+.atmo{position:absolute;inset:0;pointer-events:none;
+background:radial-gradient(38% 38% at 50% 40%,rgba(255,157,46,.20),transparent 70%),radial-gradient(60% 55% at 15% 20%,rgba(53,170,255,.18),transparent 70%),radial-gradient(50% 50% at 90% 85%,rgba(53,170,255,.10),transparent 70%)}
+.atmo::after{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 40%,transparent 0 70px,rgba(53,170,255,.09) 71px 72px);
+-webkit-mask-image:radial-gradient(circle at 50% 40%,#000 10%,transparent 72%);mask-image:radial-gradient(circle at 50% 40%,#000 10%,transparent 72%)}
+.stage{position:relative;width:min(94vw,66svh,740px);aspect-ratio:1}
+.tilt{position:absolute;inset:0;transition:transform .25s ease-out;transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.hub{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 160s linear infinite}
+.spin.rev{animation-duration:240s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pulse{transform-box:fill-box;transform-origin:center;fill:none;stroke:var(--amber);stroke-width:1.5;animation:pulse 3.6s ease-out infinite}
+@keyframes pulse{from{transform:scale(1);opacity:.7}to{transform:scale(3.4);opacity:0}}
+.rail{stroke:var(--blue);stroke-opacity:.4;stroke-width:1.6;fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.2s .3s ease forwards;transition:stroke .3s,stroke-opacity .3s}
+.rail.dim{stroke-dasharray:3 7;stroke-dashoffset:0;animation:none;stroke-opacity:.14}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hot .rail{stroke:var(--amber);stroke-opacity:.95}
+.hex{fill:rgba(53,170,255,.16);stroke:var(--blue);stroke-width:1.6;transition:fill .25s,stroke .25s,filter .25s}
+.cube{stroke:var(--blue);stroke-opacity:.7;fill:none;transition:stroke .25s}
+.nd{opacity:0;animation:fade .7s ease forwards}
+@keyframes fade{to{opacity:1}}
+.nd.hot .hex{fill:rgba(255,157,46,.25);stroke:var(--amber);filter:drop-shadow(0 0 14px rgba(255,157,46,.9))}
+.nd.hot .cube{stroke:var(--amber)}
+.nd.dev .hex{stroke-dasharray:5 4}
+.slot .hex{fill:none;stroke-dasharray:3 5;stroke-opacity:.3}
+.core{fill:rgba(255,157,46,.2);stroke:var(--amber);stroke-width:2;filter:drop-shadow(0 0 22px rgba(255,157,46,.9));animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.7}}
+.nb{position:absolute;width:15%;aspect-ratio:1;transform:translate(-50%,-50%);background:none;border:0;cursor:pointer;border-radius:50%;padding:0}
+.nb span{position:absolute;top:50%;transform:translateY(-50%);white-space:nowrap;display:flex;gap:8px;align-items:center;font:600 clamp(13px,1.6vw,17px) var(--body);
+background:rgba(5,11,22,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:7px 14px;border-radius:999px;border:1px solid var(--line);transition:border-color .25s}
+.nb.L span{right:100%;margin-right:6px}.nb.R span{left:100%;margin-left:6px}
+.nb.T span{top:auto;bottom:100%;left:50%;right:auto;transform:translateX(-50%);margin:0 0 6px}.nb.B span{top:100%;left:50%;right:auto;transform:translateX(-50%);margin:6px 0 0}
+.nb:hover span,.nb:focus-visible span{border-color:var(--amber)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)}.dot.dev{background:transparent;border:1.5px solid var(--blue);box-shadow:none}.dot.none{display:none}
+@media(max-width:700px){.nb span{top:100%;transform:translateX(-50%);left:50%;right:auto;margin:6px 0 0}.nb.L span,.nb.R span{left:50%;right:auto;margin:6px 0 0}}
+.brand{text-align:center;margin-top:10px;position:relative}
+.brand b{display:block;font:400 clamp(40px,8vw,92px)/1 var(--head);letter-spacing:.16em;margin-right:-.16em;background:linear-gradient(180deg,#fff 20%,#8fa3b8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand i{font-style:normal;color:var(--mute);font-size:16px;display:block;margin-top:12px}
+/* lista de módulos */
+.mods{padding:80px 0 40px}
+.mods h2,.cta h2{font:400 clamp(22px,3vw,32px)/1.25 var(--head);margin:0 0 36px;max-width:24ch}
+.mr{display:grid;grid-template-columns:1fr auto;gap:4px 24px;align-items:center;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:26px 0;cursor:pointer}
+.mr:last-of-type{border-bottom:1px solid var(--line)}
+.mr:hover .n{color:var(--amber)}
+.mr .n{font:400 clamp(20px,2.6vw,28px) var(--head);transition:color .2s}
+.mr .t{grid-column:1;color:var(--mute);font-size:16px}
+.mr .pill{grid-row:1/3;grid-column:2}
+@media(min-width:760px){.mr{grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) 170px}.mr .t{grid-column:2;grid-row:1}.mr .pill{grid-column:3;grid-row:1;justify-self:end}}
+.pill{display:inline-block;font:600 13px var(--body);padding:3px 12px;border-radius:999px;border:1px solid;white-space:nowrap}
+.st-ok{color:var(--amber);border-color:var(--amber)}.st-dev{color:var(--blue);border-color:rgba(53,170,255,.5)}
+.cta{padding:56px 0 88px}.cta p{color:var(--mute);max-width:52ch;margin:-12px 0 28px}
+footer{border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;padding-bottom:28px}
+@media(max-width:640px){nav a:not(.btn){display:none}}
+/* subpágina */
+.sheet{position:fixed;inset:0;z-index:50;overflow:auto;background:radial-gradient(60% 50% at 80% 10%,rgba(255,157,46,.14),transparent 70%),radial-gradient(60% 50% at 0 0,rgba(53,170,255,.16),transparent 70%),var(--bg);
+clip-path:circle(0 at var(--cx,50%) var(--cy,50%));visibility:hidden;transition:clip-path .7s cubic-bezier(.7,0,.2,1),visibility 0s .7s}
+.sheet.open{clip-path:circle(160vmax at var(--cx,50%) var(--cy,50%));visibility:visible;transition:clip-path .7s cubic-bezier(.7,0,.2,1)}
+.sheet .in{max-width:880px;margin:0 auto;padding:calc(28px + env(safe-area-inset-top,0px)) 24px 80px}
+.close{display:block;margin-left:auto;background:none;border:1px solid var(--line);border-radius:999px;padding:10px 20px;cursor:pointer}.close:hover{border-color:var(--amber)}
+.sheet h2{font:400 clamp(30px,6vw,60px)/1.1 var(--head);margin:36px 0 12px}
+.sheet .tag{color:var(--blue);font-weight:600;font-size:19px;margin:0 0 24px}
+.sheet .d{max-width:60ch;color:#c5d1de;margin:0 0 28px}
+.sheet ul{list-style:none;padding:0;margin:0 0 36px;color:var(--mute)}
+.sheet li{padding:6px 0 6px 20px;position:relative;max-width:62ch}
+.sheet li::before{content:"";position:absolute;left:0;top:1.05em;width:9px;height:1px;background:var(--amber)}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin:0 0 40px}
+@media(min-width:760px){.facts{grid-template-columns:repeat(4,1fr)}}
+.facts div{border-top:1px solid var(--line);padding:18px 16px 18px 0}
+.facts b{display:block;font:400 clamp(22px,3vw,30px)/1.2 var(--head);color:var(--amber)}
+.facts span{color:var(--mute);font-size:15px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rail,.nd{stroke-dashoffset:0;opacity:1}.pulse,animateMotion{display:none}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<header><div class="wrap">
+<a class="mark" href="#inicio">LUCY</a>
+<nav><a href="#lista">Módulos</a><a class="btn" href="mailto:contato@lucy-inst.com.br?subject=Apresenta%C3%A7%C3%A3o%20da%20Lucy">Falar com a equipe</a></nav>
+</div></header>
+
+<main>
+<section class="hero" id="inicio">
+<div class="atmo"></div>
+<div class="stage" id="stage"><div class="tilt" id="tilt"><svg class="hub" id="hub" viewBox="0 0 600 600" role="img" aria-label="Núcleo Lucy conectado aos módulos Financeira, Manager, Cursos, LCE, LCI e LCP"></svg></div></div>
+<div class="brand"><b>LUCY</b><i>Plataforma institucional. Toque em um módulo para entrar.</i></div>
+</section>
+
+<section class="mods wrap" id="lista">
+<h2>Os módulos da Lucy</h2>
+<div id="list"></div>
+</section>
+
+<section class="cta wrap">
+<h2>Quer ver a Lucy de perto?</h2>
+<p>Conte qual módulo interessa e marcamos uma apresentação.</p>
+<a class="btn" href="mailto:contato@lucy-inst.com.br?subject=Apresenta%C3%A7%C3%A3o%20da%20Lucy">Solicitar apresentação</a>
+</section>
+</main>
+<footer><div class="wrap"><span>© 2026 lucy-inst.com.br. Todos os direitos reservados.</span><span>Build 1.0</span></div></footer>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Detalhes do módulo"><div class="in" id="sin"></div></div>
+
+<script>
+var M=[
+{id:"financeira",k:"Financeira",s:"ok",n:"Lucy Financeira",t:"Pronta, e roda em hardware comum",
+ d:"O produto mais maduro da Lucy. Mais de um ano de trabalho, feito por uma pessoa só, e que combina Markov, Hamiltoniano, Monte Carlo, entropia, Bayes, Kelly e Gibbs.",
+ f:[["690 MB","de RAM em uso"],["8 GB","de tamanho total"],["Sem GPU","nenhuma placa de vídeo necessária"],["2017","i5 de 6ª geração e HD mecânico, onde foi construída"]]},
+{id:"manager",k:"Manager",s:"dev",n:"Lucy Manager",t:"Sua parceira de IA para o dia a dia",
+ d:"Um app que acompanha a sua rotina. Está em construção.",
+ b:["Lê e responde redes sociais, e-mails e matérias","Funciona offline com Gemma e online com NVIDIA Nemotron 3 Ultra","Cérebro causal em construção: entende causa e efeito, não só padrões"]},
+{id:"cursos",k:"Cursos",s:"",n:"Lucy Cursos",t:"Ensino e capacitação",
+ d:"A plataforma de cursos da Lucy.",b:[]},
+{id:"lce",k:"LCE",s:"dev",n:"LCE",t:"IA causal construída sobre física aplicada",
+ d:"Em vez de só reconhecer padrões, a LCE raciocina por causa e efeito, com base em leis físicas. Está em desenvolvimento.",
+ b:["Modelo próprio, pensado para explicar o porquê das respostas","Base do cérebro causal que está sendo construído no Lucy Manager"]}
+];
+M.push({id:"lci",k:"LCI",s:"",n:"LCI",t:"Lucy Cognitive Inscription",d:"Um mini servidor de inscrição que cria o banco de dados no computador de forma autônoma, sem configuração manual.",b:["Servidor leve de inscrições","Cria o próprio banco de dados no PC, sozinho"]},{id:"lcp",k:"LCP",s:"",n:"LCP",t:"Lucy Cognitive Points",d:"Um relógio de ponto em PWA: instala como aplicativo direto do navegador, no celular ou no computador.",b:["Registro de ponto em formato de aplicativo (PWA)","Instalação direta pelo navegador, sem loja de apps"]});
+var ST={ok:"Pronta",dev:"Em desenvolvimento"};
+var A=[-150,-30,150,30,-90,90],SL=[],C=300,R=190;
+function hx(cx,cy,r){var p=[];for(var i=0;i<6;i++){var a=(60*i-90)*Math.PI/180;p.push((cx+r*Math.cos(a)).toFixed(1)+","+(cy+r*Math.sin(a)).toFixed(1))}return p.join(" ")}
+function cb(x,y,r){var s="";[-30,90,210].forEach(function(d){var a=d*Math.PI/180;s+='<line class="cube" x1="'+x+'" y1="'+y+'" x2="'+(x+r*Math.cos(a)).toFixed(1)+'" y2="'+(y+r*Math.sin(a)).toFixed(1)+'"/>'});return s}
+function xy(a){var r=a*Math.PI/180;return[+(C+R*Math.cos(r)).toFixed(1),+(C+R*Math.sin(r)).toFixed(1)]}
+var s='<g class="spin"><circle cx="300" cy="300" r="268" fill="none" stroke="#35aaff" stroke-opacity=".3" stroke-dasharray="2 12" stroke-width="2" stroke-linecap="round"/></g>'
++'<g class="spin rev"><circle cx="300" cy="300" r="296" fill="none" stroke="#ff9d2e" stroke-opacity=".22" stroke-dasharray="60 14 6 14"/></g>'
++'<polygon points="'+hx(C,C,250)+'" fill="none" stroke="#35aaff" stroke-opacity=".28"/><polygon points="'+hx(C,C,215)+'" fill="none" stroke="#ff9d2e" stroke-opacity=".2"/>';
+var P=A.map(xy);
+P.forEach(function(p,i){s+='<g id="g'+i+'"><path class="rail" pathLength="1" d="M300 300L'+p[0]+' '+p[1]+'"/>';
+ [0,1.5].forEach(function(o){s+='<circle r="3.5" fill="#ffb457"><animateMotion dur="3s" begin="'+(1.6+i*.45+o)+'s" repeatCount="indefinite" path="M300 300L'+p[0]+' '+p[1]+'"/><animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="'+(1.6+i*.45+o)+'s" repeatCount="indefinite"/></circle>'});s+='</g>'});
+SL.forEach(function(a){var p=xy(a);s+='<path class="rail dim" d="M300 300L'+p[0]+' '+p[1]+'"/><g class="slot"><polygon class="hex" points="'+hx(p[0],p[1],26)+'"/></g>'});
+s+='<circle class="pulse" cx="300" cy="300" r="40"/><circle class="pulse" cx="300" cy="300" r="40" style="animation-delay:1.8s"/><polygon class="core" points="'+hx(C,C,46)+'"/><polygon class="cube" points="'+hx(C,C,26)+'" style="stroke:#ff9d2e"/>'+cb(C,C,26).replace(/class="cube"/g,'class="cube" style="stroke:#ff9d2e"');
+P.forEach(function(p,i){s+='<g class="nd'+(M[i].s==="dev"?' dev':'')+'" id="n'+i+'" style="animation-delay:'+(1.1+i*.12)+'s"><polygon class="hex" points="'+hx(p[0],p[1],34)+'"/>'+cb(p[0],p[1],34)+'</g>'});
+document.getElementById("hub").innerHTML=s;
+var tilt=document.getElementById("tilt"),last=null,cx=50,cy=50;
+function hot(i,on){var g=document.getElementById("g"+i),n=document.getElementById("n"+i);g.classList.toggle("hot",on);n.classList.toggle("hot",on)}
+M.forEach(function(m,i){var p=P[i],b=document.createElement("button");b.type="button";b.className="nb "+(A[i]===-90?"T":A[i]===90?"B":(A[i]<-90||A[i]>90?"L":"R"));
+ b.style.left=(p[0]/6)+"%";b.style.top=(p[1]/6)+"%";
+ b.innerHTML='<span><i class="dot '+(m.s||"none")+'"></i>'+m.n+'</span>';b.setAttribute("aria-label","Abrir "+m.n);
+ b.addEventListener("mouseenter",function(){hot(i,true)});b.addEventListener("mouseleave",function(){hot(i,false)});
+ b.addEventListener("focus",function(){hot(i,true)});b.addEventListener("blur",function(){hot(i,false)});
+ b.addEventListener("click",function(e){go(i,e)});tilt.appendChild(b)});
+var list=document.getElementById("list");
+M.forEach(function(m,i){var r=document.createElement("button");r.type="button";r.className="mr";
+ r.innerHTML='<span class="n">'+m.n+'</span><span class="t">'+m.t+'</span>'+(m.s?'<span class="pill st-'+m.s+'">'+ST[m.s]+'</span>':'<span></span>');
+ r.addEventListener("click",function(e){go(i,e)});list.appendChild(r)});
+function go(i,e){last=e&&e.currentTarget;var x=e&&e.clientX||innerWidth/2,y=e&&e.clientY||innerHeight/2;
+ var sh=document.getElementById("sheet");sh.style.setProperty("--cx",x+"px");sh.style.setProperty("--cy",y+"px");location.hash=M[i].id}
+var sheet=document.getElementById("sheet"),sin=document.getElementById("sin");
+function show(i){var m=M[i];
+ sin.innerHTML='<button class="close" type="button" id="cl">Fechar</button>'+(m.s?'<span class="pill st-'+m.s+'" style="margin-top:28px">'+ST[m.s]+'</span>':'')
+ +'<h2>'+m.n+'</h2><p class="tag">'+m.t+'</p><p class="d">'+m.d+'</p>'
+ +(m.f?'<div class="facts">'+m.f.map(function(f){return'<div><b>'+f[0]+'</b><span>'+f[1]+'</span></div>'}).join("")+'</div>':'')
+ +(m.b&&m.b.length?'<ul>'+m.b.map(function(x){return'<li>'+x+'</li>'}).join("")+'</ul>':'')
+ +'<a class="btn" href="mailto:contato@lucy-inst.com.br?subject='+encodeURIComponent("Quero conhecer a "+m.n)+'">Falar sobre a '+m.n+'</a>';
+ document.getElementById("cl").addEventListener("click",function(){location.hash="inicio"});
+ sheet.classList.add("open");sheet.scrollTop=0;document.body.style.overflow="hidden";setTimeout(function(){document.getElementById("cl").focus()},450)}
+function hide(){if(!sheet.classList.contains("open"))return;sheet.classList.remove("open");document.body.style.overflow="";if(last)last.focus()}
+function route(){var id=location.hash.slice(1),i=M.findIndex(function(m){return m.id===id});i>=0?show(i):hide()}
+addEventListener("hashchange",route);route();
+addEventListener("keydown",function(e){if(e.key==="Escape"&&sheet.classList.contains("open"))location.hash="inicio"});
+var rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+if(matchMedia("(hover:hover)").matches&&!rm){document.getElementById("inicio").addEventListener("mousemove",function(e){var r=this.getBoundingClientRect();
+ var x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;tilt.style.setProperty("--ry",(x*10)+"deg");tilt.style.setProperty("--rx",(-y*8)+"deg")});
+ document.getElementById("inicio").addEventListener("mouseleave",function(){tilt.style.setProperty("--ry","0deg");tilt.style.setProperty("--rx","0deg")})}
+/* céu de partículas */
+var cv=document.getElementById("sky"),g=cv.getContext("2d"),W,H,D=Math.min(devicePixelRatio||1,2),pts=[];
+function rs(){W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;g.setTransform(D,0,0,D,0,0)}
+rs();addEventListener("resize",rs);
+for(var k=0;k<90;k++)pts.push({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.3,v:Math.random()*.00012+.00003,c:Math.random()<.25?"255,157,46":"120,190,255",a:Math.random()*.5+.15});
+function draw(){g.clearRect(0,0,W,H);pts.forEach(function(p){if(!rm){p.y-=p.v;if(p.y<0)p.y=1}g.fillStyle="rgba("+p.c+","+p.a+")";g.beginPath();g.arc(p.x*W,p.y*H,p.r,0,6.283);g.fill()});if(!rm)requestAnimationFrame(draw)}
+draw();
+</script>
+</body>
+</html>
