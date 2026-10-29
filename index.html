@@ -163,8 +163,11 @@ var M=[
 {id:"manager",k:"Manager",s:"dev",n:"Lucy Manager",t:"Sua parceira de IA para o dia a dia",
  d:"Um app que acompanha a sua rotina. Está em construção.",
  b:["Lê e responde redes sociais, e-mails e matérias","Funciona offline com Gemma e online com NVIDIA Nemotron 3 Ultra","Cérebro causal em construção: entende causa e efeito, não só padrões"]},
-{id:"cursos",k:"Cursos",s:"",n:"Lucy Cursos",t:"Ensino e capacitação",
- d:"A plataforma de cursos da Lucy.",b:[]},
+{id:"cursos",k:"Cursos",s:"ok",stText:"Disponível",n:"Lucy Cursos",t:"Informática na prática — do básico à criação web",
+ d:"Domine do básico à criação web com ferramentas digitais na prática. Curso completo com certificado, projetos reais e suporte.",
+ link:"https://lucycursosoficial.hotmart.host/informatica-na-pratica-do-basico-a-criacao-web-com-ferramentas-digitais-528fd202-2cd2-40b0-9b52-c57be21edfe7",
+ btnText:"Acessar Curso na Hotmart",
+ b:["Do básico à criação web com ferramentas digitais","Metodologia prática e direta ao ponto","Disponível na Hotmart com garantia e acesso imediato"]},
 {id:"lce",k:"LCE",s:"dev",n:"LCE",t:"IA causal construída sobre física aplicada",
  d:"Em vez de só reconhecer padrões, a LCE raciocina por causa e efeito, com base em leis físicas. Está em desenvolvimento.",
  b:["Modelo próprio, pensado para explicar o porquê das respostas","Base do cérebro causal que está sendo construído no Lucy Manager"]}
@@ -195,17 +198,26 @@ M.forEach(function(m,i){var p=P[i],b=document.createElement("button");b.type="bu
  b.addEventListener("click",function(e){go(i,e)});tilt.appendChild(b)});
 var list=document.getElementById("list");
 M.forEach(function(m,i){var r=document.createElement("button");r.type="button";r.className="mr";
- r.innerHTML='<span class="n">'+m.n+'</span><span class="t">'+m.t+'</span>'+(m.s?'<span class="pill st-'+m.s+'">'+ST[m.s]+'</span>':'<span></span>');
+ var stLabel = m.stText || (m.s ? ST[m.s] : "");
+ r.innerHTML='<span class="n">'+m.n+'</span><span class="t">'+m.t+'</span>'+(stLabel?'<span class="pill st-'+(m.s||'ok')+'">'+stLabel+'</span>':'<span></span>');
  r.addEventListener("click",function(e){go(i,e)});list.appendChild(r)});
 function go(i,e){last=e&&e.currentTarget;var x=e&&e.clientX||innerWidth/2,y=e&&e.clientY||innerHeight/2;
  var sh=document.getElementById("sheet");sh.style.setProperty("--cx",x+"px");sh.style.setProperty("--cy",y+"px");location.hash=M[i].id}
 var sheet=document.getElementById("sheet"),sin=document.getElementById("sin");
 function show(i){var m=M[i];
- sin.innerHTML='<button class="close" type="button" id="cl">Fechar</button>'+(m.s?'<span class="pill st-'+m.s+'" style="margin-top:28px">'+ST[m.s]+'</span>':'')
+ var stLabel = m.stText || (m.s ? ST[m.s] : "");
+ var actions = '';
+ if(m.link){
+   actions = '<a class="btn" href="'+m.link+'" target="_blank" rel="noopener noreferrer">'+(m.btnText||'Acessar curso')+' &nearr;</a> '
+   +'<a class="btn ghost" href="mailto:contato@lucy-inst.com.br?subject='+encodeURIComponent("Dúvidas sobre o "+m.n)+'">Tirar dúvidas</a>';
+ } else {
+   actions = '<a class="btn" href="mailto:contato@lucy-inst.com.br?subject='+encodeURIComponent("Quero conhecer a "+m.n)+'">Falar sobre a '+m.n+'</a>';
+ }
+ sin.innerHTML='<button class="close" type="button" id="cl">Fechar</button>'+(stLabel?'<span class="pill st-'+(m.s||'ok')+'" style="margin-top:28px">'+stLabel+'</span>':'')
  +'<h2>'+m.n+'</h2><p class="tag">'+m.t+'</p><p class="d">'+m.d+'</p>'
  +(m.f?'<div class="facts">'+m.f.map(function(f){return'<div><b>'+f[0]+'</b><span>'+f[1]+'</span></div>'}).join("")+'</div>':'')
  +(m.b&&m.b.length?'<ul>'+m.b.map(function(x){return'<li>'+x+'</li>'}).join("")+'</ul>':'')
- +'<a class="btn" href="mailto:contato@lucy-inst.com.br?subject='+encodeURIComponent("Quero conhecer a "+m.n)+'">Falar sobre a '+m.n+'</a>';
+ +'<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">'+actions+'</div>';
  document.getElementById("cl").addEventListener("click",function(){location.hash="inicio"});
  sheet.classList.add("open");sheet.scrollTop=0;document.body.style.overflow="hidden";setTimeout(function(){document.getElementById("cl").focus()},450)}
 function hide(){if(!sheet.classList.contains("open"))return;sheet.classList.remove("open");document.body.style.overflow="";if(last)last.focus()}
